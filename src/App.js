@@ -11,6 +11,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(question)
       const response = await fetch('http://localhost:5000/generate-content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -28,18 +29,22 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Google Gemini Chatbot</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={question}
-          onChange={handleInputChange}
-          placeholder="Введите ваш вопрос..."
-        />
-        <button type="submit">Спросить</button>
-      </form>
+    <div className='main'>
+      <div className='title'>
+        <h1>Google Gemini Chatbot</h1>
+      </div>
+      <div className='container'>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={question}
+            onChange={handleInputChange}
+            placeholder="Введите ваш вопрос..."
+          />
+          <button type="submit">Спросить</button>
+        </form>
       {answer && <div><strong>Ответ бота:</strong> {answer}</div>}
+      </div>
     </div>
   );
 }

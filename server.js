@@ -15,8 +15,6 @@ app.use(bodyParser.json());
 app.post('/generate-content', async (req, res) => {
     const { question } = req.body;
 
-    console.log(req.body)
-
     console.log('Полученные данные:', req.body); // Логирование полученных данных
 
     // Проверка на наличие вопроса
@@ -38,7 +36,7 @@ app.post('/generate-content', async (req, res) => {
         );
 
         if (response.status === 200) {
-            const answer = response.data.contents[0].parts[0].text;
+            const answer = response.data.candidates[0].content.parts[0].text;
             return res.json({ status: 'success', data: { answer } });
         } else {
             console.error(`Google API Error: ${response.status} - ${response.data}`);
